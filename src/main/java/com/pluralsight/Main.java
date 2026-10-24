@@ -42,7 +42,7 @@ public class Main {
             choice = Console.promptForInt(mainMenuText);
             switch(choice){
                 case 1 -> processListAllVehicles(vehicles, countVehicles);
-                case 2 -> processSearchByMakeModel();
+                case 2 -> processSearchByMakeModel(vehicles, countVehicles);
                 case 3 -> processSearchByPrice(vehicles,countVehicles);
                 case 4 -> processSearchByColor(vehicles, countVehicles);
                 case 5 -> countVehicles = processAddVehicle(vehicles, countVehicles);
@@ -61,9 +61,24 @@ public class Main {
         }
     }
 
-    private static void processSearchByMakeModel() {
-        //todo search make model
+    private static void processSearchByMakeModel(Vehicle[] vehicles, int countVehicles) {
         System.out.println("Input Model: ");
+        String makeModel = scanner.nextLine().trim();
+        int found = 0;
+
+        for (int i = 0; i < countVehicles; i++) {
+
+            if (vehicles[i].getMakeModel().toLowerCase().contains(makeModel.toLowerCase())) {
+                found = 1;
+                System.out.println(vehicles[i].getMakeModel());
+            }
+
+            }
+            if (found == 0) {
+                System.out.println("No Vehicles Found!");
+        }
+
+
     }
 
 
@@ -74,6 +89,7 @@ public class Main {
             if (vehicles[i].getPrice() > minPrice && vehicles[i].getPrice() < maxPrice) {
                 System.out.println(vehicles[i].getPrice());
             }
+
         }
 
 
